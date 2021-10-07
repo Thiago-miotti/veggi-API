@@ -9,7 +9,12 @@ async function createUser(name){
     await UserRepository.createUser(name);
 }
 
+async function deleteUser(user_id){
+    await UserRepository.deleteUser(user_id);
+}
+
 module.exports = {
     listUsers: listUsers,
-    createUser: createUser
+    createUser: createUser,
+    deleteUser: deleteUser
 }

@@ -14,8 +14,18 @@ async function createUser(req, res){
     res.send("Usuario criado com sucesso !");
 }
 
+async function deleteUser(req, res){
+    const { user_id } = req.body;
+
+    await UserService.deleteUser(user_id);
+
+    res.send("Usuario deletado com sucesso !");
+}
+
+
 
 module.exports = {
     listUsers: listUsers,
-    createUser: createUser
+    createUser: createUser,
+    deleteUser: deleteUser
 }
