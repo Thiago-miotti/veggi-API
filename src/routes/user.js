@@ -8,12 +8,16 @@ router.get("/all",async (req, res) => {
     await UserControler.listUsers(req, res)
 });
 
-router.post("/create",async (req, res) => {
+router.post("/",async (req, res) => {
     await UserControler.createUser(req, res)
 });
 
-router.post("/delete",async (req, res) => {
+router.delete("/:user_id",async (req, res) => {
     await UserControler.deleteUser(req, res)
+});
+
+router.get("/:user_id",async (req, res) => {
+    await UserControler.getUser(req, res)
 });
 
 

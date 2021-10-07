@@ -15,11 +15,18 @@ async function createUser(req, res){
 }
 
 async function deleteUser(req, res){
-    const { user_id } = req.body;
+    const { user_id } = req.params;
 
     await UserService.deleteUser(user_id);
 
     res.send("Usuario deletado com sucesso !");
+}
+
+async function getUser(req, res){
+    const { user_id } = req.params;
+
+    const user = await UserService.getUser(user_id);
+    res.send(user);
 }
 
 
@@ -27,5 +34,6 @@ async function deleteUser(req, res){
 module.exports = {
     listUsers: listUsers,
     createUser: createUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    getUser: getUser
 }

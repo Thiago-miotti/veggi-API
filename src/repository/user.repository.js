@@ -21,8 +21,20 @@ async function deleteUser(user_id){
        await sql.query("DELETE FROM user WHERE user_id = ?", [parseInt(user_id)]);
     })
 }
+
+async function getUser(user_id){
+    let user; 
+
+    await Sql.conectar(async (sql) => {
+       user = await sql.query("SELECT * FROM user WHERE user_id = ?", [parseInt(user_id)]);
+    })
+
+    return user;
+}
+
 module.exports = {
     listUsers: listUsers,
     createUser: createUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    getUser:getUser
 }

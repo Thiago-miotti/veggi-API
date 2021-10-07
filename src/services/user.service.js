@@ -13,8 +13,14 @@ async function deleteUser(user_id){
     await UserRepository.deleteUser(user_id);
 }
 
+async function getUser(user_id){
+    const user = await UserRepository.getUser(user_id);
+    return user;
+}
+
 module.exports = {
     listUsers: listUsers,
     createUser: createUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    getUser: getUser
 }
