@@ -4,16 +4,16 @@ const router = express.Router();
 // Controllers
 const TaskControler = require('../controller/task.controller');
 
-router.post("/",async (req, res) => {
-    await TaskControler.createTask(req, res)
+router.post("/",async (req, res, next) => {
+    await TaskControler.createTask(req, res, next)
 })
 
-router.delete("/:task_id",async (req, res) => {
-    await TaskControler.deleteTask(req, res)
+router.delete("/:task_id",async (req, res, next) => {
+    await TaskControler.deleteTask(req, res, next)
 });
 
-router.put("/update",async (req, res) => {
-    await TaskControler.updateTask(req, res)
+router.put("/:task_id",async (req, res, next) => {
+    await TaskControler.updateTask(req, res, next)
 });
 
 

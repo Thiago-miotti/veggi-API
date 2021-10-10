@@ -14,7 +14,7 @@ async function deleteTask(task_id){
 
 async function updateTask(task_id, description, status_id){
     await Sql.conectar(async (sql) => {
-       await sql.query("INSERT INTO task (task_id, task_description,task_status_id) VALUES(?, ?, ?)", [parseInt(task_id),description, status_id]);
+       await sql.query("UPDATE task SET task_description = ?, task_status_id = ? WHERE task_id = ? ", [description, status_id, parseInt(task_id)]);
     })
 }
 

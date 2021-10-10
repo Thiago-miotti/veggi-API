@@ -8,8 +8,8 @@ async function deleteTask(task_id){
     await TaskRepository.deleteTask(task_id);
 }
 
-async function updateTask(task_id,description, status_id){
-    await TaskRepository.updateTask(task_id,description, status_id);
+async function updateTask(task_id, description, status_id){
+    await TaskRepository.updateTask(task_id, description, status_id);
 }
 
 

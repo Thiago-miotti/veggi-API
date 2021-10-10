@@ -1,32 +1,33 @@
 const TaskService = require('../services/task.service');
 
 
-async function createTask(req, res){
+async function createTask(req, res, next){
     const { description, status_id, user_id } = req.body;
 
     await TaskService.createTask(description, status_id, user_id);
 
-    res.send("Tarefa criada com sucesso !");
+    res.status(201).send("Tarefa criada com sucesso !");
 }
 
-async function deleteTask(req, res){
+async function deleteTask(req, res, next){
     const { task_id } = req.params;
 
     await TaskService.deleteTask( task_id);
 
-    res.send("Tarefa deletada com sucesso !");
+    res.status(200).send("Tarefa deletada com sucesso !");
 }
 
-async function updateTask(req, res){
-    const { task_id,description, status_id } = req.body;
+async function updateTask(req, res, next){
+    const { task_id } = req.params;
+    const { user_id, description, status_id } = req.body;
 
-    await TaskService.updateTask( task_id, description, status_id);
+    await TaskService.updateTask(task_id, description, status_id);
 
-    res.send("Tarefa atualizada com sucesso !");
+    res.status(200).send("Tarefa atualizada com sucesso !");
 }
 
 module.exports = {
-    createTask:createTask,
-    deleteTask:deleteTask,
-    updateTask:updateTask
+    createTask: createTask,
+    deleteTask: deleteTask,
+    updateTask: updateTask
 }

@@ -32,9 +32,20 @@ async function getUser(user_id){
     return user;
 }
 
+async function getTasksByUser(user_id){
+    let tasks; 
+
+    await Sql.conectar(async (sql) => {
+       tasks = await sql.query("SELECT * FROM user u INNER JOIN task t ON u.user_id = t.user_id WHERE u.user_id = ?", [parseInt(user_id)]);
+    })
+
+    return tasks;
+}
+
 module.exports = {
     listUsers: listUsers,
     createUser: createUser,
     deleteUser: deleteUser,
-    getUser:getUser
+    getUser: getUser,
+    getTasksByUser: getTasksByUser
 }
