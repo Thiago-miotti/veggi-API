@@ -1,45 +1,76 @@
-const { ApplicationError, CommonHTTPExceptions } = require('@pedromiotti/exerror');
+const {
+  ApplicationError,
+  CommonHTTPExceptions,
+} = require("@pedromiotti/exerror");
+
+const { CustomExceptions } = require("../utils/exceptions/customExceptions");
 
 const UserRepository = require("../repository/user.repository");
 
-async function listUsers(){
-    const users = await UserRepository.listUsers();
-    return users;
+async function listUsers() {
+  let users;
+
+  try {
+    users = await UserRepository.listUsers();
+  } catch (e) {
+    throw new ApplicationError(e);
+  }
+
+  return users;
 }
 
-async function createUser(name){
+async function createUser(name) {
+  if (!name) throw new ApplicationError(CustomExceptions.MISSING_INFORMATION);
+
+  try {
     await UserRepository.createUser(name);
+  } catch (e) {
+    throw new ApplicationError(e);
+  }
 }
 
-async function deleteUser(user_id){
+async function deleteUser(user_id) {
+  if (!user_id) throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
+
+  try {
     await UserRepository.deleteUser(user_id);
+  } catch (e) {
+    throw new ApplicationError(e);
+  }
 }
 
-async function getUser(user_id){
-    const user = await UserRepository.getUser(user_id);
-    return user;
+async function getUser(user_id) {
+  let user;
+
+  if (!user_id) throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
+
+  try {
+    user = await UserRepository.getUser(user_id);
+  } catch (e) {
+    throw new ApplicationError(e);
+  }
+
+  return user;
 }
 
-async function getTasksByUser(user_id){
-    let tasks;
+async function getTasksByUser(user_id) {
+  let tasks;
 
-    if(!user_id)
-            throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
+  if (!user_id) throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
 
-    try{
-        tasks = await UserRepository.getTasksByUser(user_id);
-    }
-    catch(e){
-        throw new ApplicationError(e); 
-    }
+  try {
+    tasks = await UserRepository.getTasksByUser(user_id);
+  } catch (e) {
+    throw new ApplicationError(e);
+  }
 
-    return tasks;
+  return tasks;
 }
 
 module.exports = {
-    listUsers: listUsers,
-    createUser: createUser,
-    deleteUser: deleteUser,
-    getUser: getUser,
-    getTasksByUser: getTasksByUser 
-}
+  listUsers: listUsers,
+  createUser: createUser,
+  deleteUser: deleteUser,
+  getUser: getUser,
+  getTasksByUser: getTasksByUser,
+};

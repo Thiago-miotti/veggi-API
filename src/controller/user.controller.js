@@ -1,55 +1,69 @@
-const UserService = require('../services/user.service');
+const UserService = require("../services/user.service");
 
-
-async function listUsers(req, res, next){
+async function listUsers(req, res, next) {
+  try {
     const users = await UserService.listUsers();
-    res.send(users);
+
+    res.status(200).send(users);
+
+  } catch (e) {
+    next(e);
+  }
 }
 
-async function createUser(req, res, next){
+async function createUser(req, res, next) {
+  try {
     const { name } = req.body;
 
     await UserService.createUser(name);
 
-    res.send("Usuario criado com sucesso !");
+    res.status(201).send("Usuario criado com sucesso !");
+  } catch (e) {
+    next(e);
+  }
 }
 
-async function deleteUser(req, res, next){
+async function deleteUser(req, res, next) {
+  try {
     const { user_id } = req.params;
 
     await UserService.deleteUser(user_id);
 
-    res.send("Usuario deletado com sucesso !");
+    res.status(200).send("Usuario deletado com sucesso !");
+  } catch (e) {
+    next(e);
+  }
 }
 
-async function getUser(req, res, next){
+async function getUser(req, res, next) {
+  try {
     const { user_id } = req.params;
 
     const user = await UserService.getUser(user_id);
 
-    res.send(user);
+    res.status(200).send(user);
+  } catch (e) {
+    next(e);
+  }
 }
 
-async function getTasksByUser(req, res, next){
-    try{
-        const { user_id } = req.params;
+async function getTasksByUser(req, res, next) {
+  try {
+    const { user_id } = req.params;
 
-        const tasks = await UserService.getTasksByUser(user_id);
+    const tasks = await UserService.getTasksByUser(user_id);
+
+    res.status(200).send(tasks);
     
-        res.send(tasks);
-    }
-    catch(e){
-        next(e);
-    }
-    
+  } catch (e) {
+    next(e);
+  }
 }
-
-
 
 module.exports = {
-    listUsers: listUsers,
-    createUser: createUser,
-    deleteUser: deleteUser,
-    getUser: getUser,
-    getTasksByUser: getTasksByUser
-}
+  listUsers: listUsers,
+  createUser: createUser,
+  deleteUser: deleteUser,
+  getUser: getUser,
+  getTasksByUser: getTasksByUser,
+};
