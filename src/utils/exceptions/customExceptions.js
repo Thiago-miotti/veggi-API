@@ -1,3 +1,5 @@
+const { ERROR_TYPES } = require('@pedromiotti/exerror');
+
 const CustomExceptions = {
     MISSING_INFORMATION: {
         type: ERROR_TYPES.CLIENT,
@@ -7,4 +9,4 @@ const CustomExceptions = {
     }
 };
 
-export { CustomExceptions };
+module.exports = { CustomExceptions };

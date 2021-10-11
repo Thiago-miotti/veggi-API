@@ -29,7 +29,7 @@ async function updateTask(req, res, next) {
     const { task_id } = req.params;
     const { user_id, description, status_id } = req.body;
 
-    await TaskService.updateTask(task_id, description, status_id);
+    await TaskService.updateTask(task_id, description, status_id, user_id);
 
     res.status(200).send("Tarefa atualizada com sucesso !");
   } catch (e) {}

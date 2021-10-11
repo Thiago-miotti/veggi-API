@@ -5,12 +5,11 @@ const {
 
 const { CustomExceptions } = require("../utils/exceptions/customExceptions");
 
-
 const TaskRepository = require("../repository/task.repository");
 
 async function createTask(description, status_id, user_id) {
   if (!description || !status_id || !user_id)
-  throw new ApplicationError(CustomExceptions.MISSING_INFORMATION);
+    throw new ApplicationError(CustomExceptions.MISSING_INFORMATION);
 
   try {
     await TaskRepository.createTask(description, status_id, user_id);
