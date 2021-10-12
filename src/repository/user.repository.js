@@ -22,7 +22,7 @@ async function deleteUser(user_id) {
   });
 }
 
-async function getUser(user_id) {
+async function getUserById(user_id) {
   let user;
 
   await Sql.conectar(async (sql) => {
@@ -51,6 +51,6 @@ module.exports = {
   listUsers: listUsers,
   createUser: createUser,
   deleteUser: deleteUser,
-  getUser: getUser,
+  getUserById: getUserById,
   getTasksByUser: getTasksByUser,
 };

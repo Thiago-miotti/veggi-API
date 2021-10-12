@@ -14,7 +14,6 @@ async function createTask(description, status_id, user_id) {
 
   try {
     let user = await UserService.getUser(user_id);
-    console.log(user)
     if (!user) throw new ApplicationError(CustomExceptions.USER_NOT_FOUND);
 
     await TaskRepository.createTask(description, status_id, user_id);

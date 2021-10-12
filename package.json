@@ -4,12 +4,13 @@
   "description": "Teste tecnico para desenvolvedor Full-Stack",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/app.js"
   },
   "author": "Thiago Miotti",
   "license": "ISC",
   "dependencies": {
     "@pedromiotti/exerror": "^1.0.2",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1"
   },

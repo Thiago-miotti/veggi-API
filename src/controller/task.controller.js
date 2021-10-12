@@ -32,7 +32,9 @@ async function updateTask(req, res, next) {
     await TaskService.updateTask(task_id, description, status_id, user_id);
 
     res.status(200).send("Tarefa atualizada com sucesso !");
-  } catch (e) {}
+  } catch (e) {
+    next(e);
+  }
 }
 
 module.exports = {

@@ -39,13 +39,13 @@ async function deleteUser(user_id) {
   }
 }
 
-async function getUser(user_id) {
+async function getUserById(user_id) {
   let user;
 
   if (!user_id) throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
 
   try {
-    user = await UserRepository.getUser(user_id);
+    user = await UserRepository.getUserById(user_id);
   } catch (e) {
     throw new ApplicationError(e);
   }
@@ -71,6 +71,6 @@ module.exports = {
   listUsers: listUsers,
   createUser: createUser,
   deleteUser: deleteUser,
-  getUser: getUser,
+  getUserById: getUserById,
   getTasksByUser: getTasksByUser,
 };
