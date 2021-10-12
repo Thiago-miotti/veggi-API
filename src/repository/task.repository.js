@@ -3,7 +3,7 @@ const Sql = require("../infra/sql");
 async function createTask(description, status_id, user_id) {
   await Sql.conectar(async (sql) => {
     await sql.query(
-      "INSERT INTO task (task_description,task_status_id, user_id) VALUES(?, ?, ?)",
+      "INSERT INTO task (task_description, task_status_id, user_id) VALUES(?, ?, ?)",
       [description, status_id, parseInt(user_id)]
     );
   });
