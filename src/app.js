@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const cors = require('cors');
+
 const { errorHandler } = require('@pedromiotti/exerror');
 
 // Routes
@@ -9,7 +11,7 @@ const TaskRoutes = require('./routes/task');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+app.use(cors('*'));
 
 app.use('/api/v1/user', UserRoutes);
 app.use('/api/v1/task', TaskRoutes);

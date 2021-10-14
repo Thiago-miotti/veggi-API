@@ -3,6 +3,10 @@ const router = express.Router();
 
 const TaskControler = require("../controller/task.controller");
 
+router.get("/", async (req, res, next) => {
+  await TaskControler.getAllTasks(req, res, next);
+});
+
 router.post("/", async (req, res, next) => {
   await TaskControler.createTask(req, res, next);
 });
