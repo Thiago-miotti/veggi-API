@@ -4,7 +4,7 @@
   "description": "Teste tecnico para desenvolvedor Full-Stack",
   "main": "src/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/app.js"
   },
   "author": "Thiago Miotti",
   "license": "ISC",
