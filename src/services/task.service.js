@@ -13,7 +13,7 @@ async function createTask(description, status_id, user_id) {
     throw new ApplicationError(CustomExceptions.MISSING_INFORMATION);
 
   try {
-    let user = await UserService.getUser(user_id);
+    let user = await UserService.getUserById(user_id);
     if (!user) throw new ApplicationError(CustomExceptions.USER_NOT_FOUND);
 
     await TaskRepository.createTask(description, status_id, user_id);
@@ -42,8 +42,17 @@ async function updateTask(task_id, description, status_id, user_id) {
   }
 }
 
+async function getAllTasks() {
+  try {
+    return await TaskRepository.getAllTasks();
+  } catch (e) {
+    throw new ApplicationError(e);
+  }
+}
+
 module.exports = {
   createTask: createTask,
   deleteTask: deleteTask,
   updateTask: updateTask,
+  getAllTasks: getAllTasks
 };

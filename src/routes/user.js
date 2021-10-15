@@ -4,7 +4,7 @@ const router = express.Router();
 // Controllers
 const UserControler = require("../controller/user.controller");
 
-router.get("/all", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   await UserControler.listUsers(req, res, next);
 });
 
@@ -17,7 +17,7 @@ router.delete("/:user_id", async (req, res, next) => {
 });
 
 router.get("/:user_id", async (req, res, next) => {
-  await UserControler.getUser(req, res, next);
+  await UserControler.getUserById(req, res, next);
 });
 
 router.get("/tasks/:user_id", async (req, res, next) => {

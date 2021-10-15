@@ -22,10 +22,23 @@ async function updateTask(task_id, description, status_id, user_id) {
       [description, status_id, user_id, parseInt(task_id)]
     );
   });
+
+}
+
+async function getAllTasks() {
+  let tasks;
+  await Sql.conectar(async (sql) => {
+    tasks = await sql.query(
+      "SELECT * FROM task ", []
+    );
+  });
+
+  return tasks;
 }
 
 module.exports = {
   createTask: createTask,
   deleteTask: deleteTask,
   updateTask: updateTask,
+  getAllTasks: getAllTasks
 };

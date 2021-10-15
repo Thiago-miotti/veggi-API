@@ -12,6 +12,16 @@ async function createTask(req, res, next) {
   }
 }
 
+async function getAllTasks(req, res, next) {
+  try {
+    const tasks = await TaskService.getAllTasks();
+
+    res.status(200).send(tasks);
+  } catch (e) {
+    next(e);
+  }
+}
+
 async function deleteTask(req, res, next) {
   try {
     const { task_id } = req.params;
@@ -32,11 +42,14 @@ async function updateTask(req, res, next) {
     await TaskService.updateTask(task_id, description, status_id, user_id);
 
     res.status(200).send("Tarefa atualizada com sucesso !");
-  } catch (e) {}
+  } catch (e) {
+    next(e);
+  }
 }
 
 module.exports = {
   createTask: createTask,
   deleteTask: deleteTask,
   updateTask: updateTask,
+  getAllTasks: getAllTasks
 };

@@ -35,11 +35,11 @@ async function deleteUser(req, res, next) {
   }
 }
 
-async function getUser(req, res, next) {
+async function getUserById(req, res, next) {
   try {
     const { user_id } = req.params;
 
-    const user = await UserService.getUser(user_id);
+    const user = await UserService.getUserById(user_id);
 
     res.status(200).send(user);
   } catch (e) {
@@ -64,6 +64,6 @@ module.exports = {
   listUsers: listUsers,
   createUser: createUser,
   deleteUser: deleteUser,
-  getUser: getUser,
+  getUserById: getUserById,
   getTasksByUser: getTasksByUser,
 };
