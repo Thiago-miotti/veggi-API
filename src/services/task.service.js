@@ -14,7 +14,7 @@ async function createTask(description, status_id, user_id) {
 
   try {
     let user = await UserService.getUserById(user_id);
-    if (!user) throw new ApplicationError(CustomExceptions.USER_NOT_FOUND);
+    if (user.length === 0 ) throw new ApplicationError(CustomExceptions.USER_NOT_FOUND);
 
     await TaskRepository.createTask(description, status_id, user_id);
   } catch (e) {
@@ -36,6 +36,9 @@ async function updateTask(task_id, description, status_id, user_id) {
   if (!task_id) throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
 
   try {
+    let user = await UserService.getUserById(user_id);
+    if (user.length === 0) throw new ApplicationError(CustomExceptions.USER_NOT_FOUND);
+    
     await TaskRepository.updateTask(task_id, description, status_id, user_id);
   } catch (e) {
     throw new ApplicationError(e);

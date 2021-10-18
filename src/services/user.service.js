@@ -33,6 +33,9 @@ async function deleteUser(user_id) {
   if (!user_id) throw new ApplicationError(CommonHTTPExceptions.BAD_REQUEST);
 
   try {
+    let user = await UserRepository.getUserById(user_id);
+    if(user.length === 0) throw new ApplicationError(CustomExceptions.USER_NOT_FOUND);
+
     await UserRepository.deleteUser(user_id);
   } catch (e) {
     throw new ApplicationError(e);
